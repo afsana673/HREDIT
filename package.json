@@ -1,0 +1,13 @@
+{
+  "name": "imgupscaler-render-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ImgUpscaler endpoint gateway, ready for GitHub and Render",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=22" },
+  "license": "MIT"
+}

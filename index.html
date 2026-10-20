@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0d14">
+  <title>SK Vision AI • Image Studio</title>
+  <style>
+    :root { color-scheme:dark; --bg:#090a11; --card:#151723; --card2:#191c2a; --stroke:#2b2f42; --muted:#a6aec5; --text:#f6f7fd; --accent:#ad91ff; --accent2:#70dded; --success:#65d6ad; --danger:#fc8d99; --shadow:0 14px 48px rgba(0,0,0,.26); }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 83% -10%,#272047 0%,transparent 35%),radial-gradient(ellipse at -10% 27%,#113640 0%,transparent 24%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.48;cursor:not-allowed}a{color:#c8baff}.shell{max-width:1430px;margin:auto;padding:0 22px 50px}.topbar{height:82px;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #ffffff15}.brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:800;letter-spacing:-.5px}.brand-mark{width:39px;height:39px;border-radius:13px;background:linear-gradient(137deg,#71deeb 3%,#957af3 54%,#f39cce);display:grid;place-items:center;box-shadow:0 0 24px #987dff35}.brand-mark svg{width:24px;height:24px;fill:#fff}.brand-sub{font-weight:450;color:#babdd1;font-size:12px;letter-spacing:0;display:block;margin-top:-3px}.top-right{display:flex;gap:9px;align-items:center}.chip{border-radius:40px;border:1px solid #495169;background:#ffffff08;color:#c2c9dd;display:flex;gap:8px;align-items:center;padding:8px 11px;font-size:12px;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:#f4ac63;box-shadow:0 0 10px #ffc16e}.dot.ok{background:var(--success);box-shadow:0 0 12px #65d6ad}.dot.bad{background:#f37f93;box-shadow:0 0 12px #f37f93}.header-link{padding:8px 12px;border-radius:11px;background:#ffffff0d;border:1px solid #ffffff15;text-decoration:none;font-size:12px}.hero{padding:37px 0 24px;display:flex;align-items:end;justify-content:space-between;gap:20px}.eyebrow{color:#b5a2ff;font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}.hero h1{font-size:clamp(28px,3.3vw,46px);line-height:1.14;letter-spacing:-1.8px;margin:9px 0}.gradient{background:linear-gradient(110deg,#d9c7ff 7%,#9ce8eb 70%,#a5abff);background-clip:text;color:transparent}.hero p{color:var(--muted);margin:0;font-size:13px}.hero-tag{padding:8px 13px;border:1px solid #454564;border-radius:100px;font-size:12px;color:#c6cbde;background:#ffffff05;white-space:nowrap}.workspace{display:grid;grid-template-columns:minmax(350px,480px) minmax(0,1fr);gap:21px;align-items:start}.panel{border:1px solid var(--stroke);border-radius:23px;background:linear-gradient(150deg,#181a28f2,#10121ef9);box-shadow:var(--shadow)}.control{padding:23px}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.panel-title h2{font-size:16px;margin:0;letter-spacing:-.3px}.step{display:flex;align-items:center;gap:8px;font-weight:700;color:#d6dbed;font-size:13px;margin:20px 0 10px}.step-index{border:1px solid #57506e;background:#a28af425;color:#d6c5ff;width:23px;height:23px;display:grid;place-items:center;border-radius:8px;font-size:11px}.upload-box{padding:19px;border:1.5px dashed #666077;border-radius:17px;text-align:center;background:linear-gradient(145deg,#27233c60,#151c2d45);position:relative;transition:.2s}.upload-box.dragging{border-color:#9fdde6;background:#2e3663aa}.upload-box svg{height:29px;width:29px;color:#b7a2f9}.upload-box strong{display:block;font-size:13px;margin:7px 0 3px}.upload-box p{font-size:12px;margin:0;color:var(--muted)}.upload-box input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.upload-inline{margin-top:10px;display:none;align-items:center;gap:10px;padding:8px 10px;background:#0b0c15;border:1px solid #33364e;border-radius:11px}.upload-inline img{width:38px;height:38px;border-radius:8px;object-fit:cover}.upload-name{overflow:hidden;min-width:0;flex:1;font-size:12px}.upload-name strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.upload-name span{color:var(--muted);font-size:11px}.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mode{border-radius:13px;border:1px solid #373b52;background:#171928;color:#c1c7db;padding:12px 10px;text-align:left;display:flex;align-items:center;gap:10px;min-height:47px;font-weight:650;font-size:12px}.mode .mode-emoji{font-size:19px}.mode.active{background:linear-gradient(135deg,#6f63bb50,#367e8950);border-color:#aa95f9;color:#fff;box-shadow:inset 0 0 0 1px #aa95f929}.input,textarea,select{display:block;width:100%;border:1px solid #3b3d55;background:#0d0f1a;color:var(--text);border-radius:12px;padding:12px;outline:none;transition:border-color .18s}.input:focus,textarea:focus,select:focus{border-color:#a28cf5;box-shadow:0 0 0 3px #ae96fa18}textarea{resize:vertical;min-height:113px;font-size:13px}.quick-prompts{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 0}.suggestion{background:#222235;border:1px solid #434056;color:#c3c6df;padding:6px 10px;border-radius:40px;font-size:11px}.suggestion:hover{border-color:#b29afa;color:#fff}.settings-line{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.small-label{display:block;color:#aeb5cb;font-weight:600;font-size:11px;margin:0 0 7px}select{padding:11px 10px}.primary{width:100%;border:0;border-radius:13px;background:linear-gradient(120deg,#b095ff,#7a80ff 45%,#77d0dd);color:#12101a;font-size:14px;font-weight:850;padding:15px;box-shadow:0 12px 29px #7c76ff3b;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:10px}.primary:hover:not(:disabled){filter:brightness(1.12)}.secondary{border:1px solid #464a64;border-radius:10px;background:#24283b;color:#e4e8fc;padding:10px 13px;font-size:12px;font-weight:700}.ghost{background:transparent;border:1px solid #393d52;border-radius:10px;color:#cfd3e6;padding:10px 12px;font-size:12px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.helper{font-size:11px;color:#a2a9bf;margin:8px 0 0}.mini-note{font-size:11px;color:#b1b6cd;padding:12px;border-radius:11px;border:1px solid #484258;background:#241d32;margin-top:16px}.preview{padding:23px;min-height:635px}.preview-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.preview-head h2{margin:0;font-size:16px}.preview-actions{display:flex;gap:8px}.icon-btn{border-radius:10px;background:#262a3a;border:1px solid #40445b;color:#dedff0;padding:8px 11px;font-size:12px}.empty{min-height:410px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed #3a3d52;border-radius:19px;margin-top:21px;padding:24px;background:radial-gradient(ellipse at center,#29244570,transparent 70%)}.empty-art{position:relative;width:174px;height:145px;margin-bottom:15px}.art-a,.art-b,.art-c{position:absolute;box-shadow:0 12px 40px #10101d80;border:1px solid #ffffff27}.art-a{inset:18px 45px 7px 11px;transform:rotate(-14deg);background:linear-gradient(145deg,#30476c,#84b3ce 48%,#786ba1);border-radius:16px}.art-b{inset:5px 12px 20px 43px;transform:rotate(13deg);background:linear-gradient(150deg,#8062b0,#ca94bc 55%,#4e94af);border-radius:16px}.art-c{top:48px;left:66px;width:49px;height:49px;border-radius:50%;background:linear-gradient(145deg,#f7d2ff,#7c7fea);display:grid;place-items:center;color:#222;font-size:25px}.empty h3{margin:0 0 5px;font-size:18px}.empty p{font-size:12px;color:var(--muted);max-width:340px;line-height:1.7;margin:0}.results{display:none;margin-top:20px}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.image-tile{background:#0d0e17;border:1px solid #303348;border-radius:15px;overflow:hidden;position:relative;min-height:220px;display:flex;align-items:center;justify-content:center}.image-tile img{width:100%;height:350px;object-fit:contain;display:block}.img-label{position:absolute;top:9px;left:9px;border-radius:30px;background:#0c0d16cf;color:#e5e6ef;padding:5px 10px;font-size:11px;z-index:1}.waiting{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#aeb2c7;font-size:12px;padding:28px;text-align:center}.spinner{height:27px;width:27px;border:3px solid #ffffff27;border-top-color:#bca5ff;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.result-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}.result-toolbar small{color:#99a5bd}.status-box{border:1px solid #3d4054;background:#101320;border-radius:13px;padding:12px 13px;margin-top:18px;display:none}.status-box.show{display:block}.status-box strong{font-size:12px}.status-box p{font-size:12px;color:#aeb7ce;margin:5px 0 0;overflow-wrap:anywhere}.status-box.error{border-color:#a74a6177;background:#3b1b2780}.status-box.error strong{color:#ffb0ba}.status-box.success{border-color:#65d6ad66}.progress-track{width:100%;height:5px;border-radius:3px;background:#272a3b;margin-top:11px;overflow:hidden;display:none}.progress-track.show{display:block}.progress-track span{display:block;height:100%;background:linear-gradient(90deg,#9584ff,#83e9df);transition:width .25s;width:5%}.divider{height:1px;background:#333649;margin:23px 0}.api-config{margin-top:24px}.api-config details{border:1px solid #3b3c51;border-radius:13px;background:#11131e;overflow:hidden}.api-config details+details{margin-top:10px}.api-config summary{cursor:pointer;padding:13px;font-weight:750;font-size:12px;user-select:none;list-style:none}.api-config summary::-webkit-details-marker{display:none}.api-config summary:after{content:'⌄';float:right;color:#9ba4bd}.api-config details[open] summary:after{content:'⌃'}.details-inner{padding:0 13px 13px}.key-field{display:flex;gap:7px}.key-field input{flex:1;min-width:0}.mini-btn{border:1px solid #414661;background:#212438;color:#d1d9ed;padding:0 11px;border-radius:10px;white-space:nowrap}.api-config textarea{min-height:96px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;line-height:1.55;tab-size:2}.api-config .helper{line-height:1.65}.debug{background:#0a0b14;border-radius:11px;color:#9edfd8;padding:11px;max-height:225px;overflow:auto;font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #303243}.credit{margin:23px auto 0;text-align:center;font-size:11px;color:#939cb3}.hidden{display:none!important}input[type=range]{accent-color:#a48afe;width:100%}.filter-block{padding:15px;background:#10121e;border:1px solid #3b3c52;border-radius:13px;margin-top:18px}.filter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.filter-grid label{font-size:11px;color:#b0b6cd}.filter-grid output{float:right;color:#e6d9ff}.filter-grid input{margin-top:10px}.note{font-size:11px;color:#aeb7cc;margin-top:11px}.toast{position:fixed;bottom:16px;right:16px;z-index:40;background:#2b2d42;border:1px solid #696280;box-shadow:var(--shadow);border-radius:12px;padding:12px 16px;max-width:min(400px,90vw);display:none;font-size:12px;line-height:1.6}.toast.show{display:block}@media(max-width:990px){.workspace{grid-template-columns:minmax(300px,440px) minmax(0,1fr)}.control,.preview{padding:17px}.compare{grid-template-columns:1fr}.image-tile img{height:300px}.hero-tag{display:none}}@media(max-width:730px){.shell{padding:0 12px 35px}.topbar{height:71px}.header-link{display:none}.brand{font-size:16px}.chip{font-size:10px;padding:7px 9px}.hero{padding:26px 4px 20px}.hero h1{font-size:30px;letter-spacing:-1px}.hero p{max-width:320px}.workspace{grid-template-columns:minmax(0,1fr);gap:14px}.preview{min-height:0}.empty{min-height:280px}.compare{grid-template-columns:repeat(2,minmax(0,1fr))}.image-tile{min-height:135px}.image-tile img{height:210px}.filter-grid{grid-template-columns:1fr}.panel{border-radius:17px}.top-right .chip:nth-child(2){display:none}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 1.5 14.7 9.3 22.5 12l-7.8 2.7L12 22.5l-2.7-7.8L1.5 12l7.8-2.7L12 1.5Z"/></svg></div><div>SK Vision AI<span class="brand-sub">Intelligent image studio</span></div></div>
+    <div class="top-right"><span class="chip"><span id="connectionDot" class="dot"></span><span id="connectionText">Checking API...</span></span><a class="header-link" href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a></div>
+  </header>
+  <section class="hero"><div><div class="eyebrow">Create something amazing</div><h1>Your ideas, <span class="gradient">reimagined.</span></h1><p>Upload a photo, describe the changes, and edit with AI-powered tools.</p></div><div class="hero-tag">✦ Powered by your Render API</div></section>
+  <main class="workspace">
+    <section class="panel control" aria-label="Editor controls">
+      <div class="panel-title"><h2>✦ AI Image Editor</h2><span class="chip">JPG · PNG · WEBP</span></div>
+      <div class="step"><span class="step-index">1</span> Add your image</div>
+      <div id="uploadBox" class="upload-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M20 16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/></svg>
+        <strong>Tap to upload or drop your image</strong><p>Supported: JPG, PNG, WebP · up to 24 MB</p>
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" aria-label="Choose image to edit">
+      </div>
+      <div class="upload-inline" id="fileInfo"><img id="tinyPreview" alt="Selected photo"><div class="upload-name"><strong id="fileName"></strong><span id="fileSize"></span></div><button class="mini-btn" type="button" id="removeImage" title="Remove image">✕</button></div>
+      <div class="step"><span class="step-index">2</span> Choose an editing tool</div>
+      <div class="mode-grid" id="modes">
+        <button class="mode active" data-mode="prompt" type="button"><span class="mode-emoji">✦</span> AI Prompt Edit</button>
+        <button class="mode" data-mode="enhance" type="button"><span class="mode-emoji">✨</span> Enhance Photo</button>
+        <button class="mode" data-mode="remove-background" type="button"><span class="mode-emoji">🖼️</span> Remove BG</button>
+        <button class="mode" data-mode="remove-object" type="button"><span class="mode-emoji">🪄</span> Remove Object</button>
+      </div>
+      <div class="step"><span class="step-index">3</span> Describe your edit</div>
+      <textarea id="prompt" maxlength="1000" spellcheck="true" placeholder="Example: Change my outfit to a stylish black suit. Keep the same face, hairstyle, and facial features."></textarea>
+      <div class="quick-prompts"><button class="suggestion" data-prompt="Enhance details and lighting, keep the face and identity exactly the same.">✨ Better details</button><button class="suggestion" data-prompt="Change the background to a beautiful cinematic city at night. Keep the subject unchanged.">🌃 Night city</button><button class="suggestion" data-prompt="Change the dress color to pink, while preserving the person's face and hairstyle.">👗 Pink dress</button><button class="suggestion" data-prompt="Remove the unwanted object and reconstruct the background naturally.">🪄 Clean up</button></div>
+      <div class="settings-line"><label><span class="small-label">Aspect Ratio</span><select id="ratio"><option value="default">Original (default)</option><option value="1:1">1:1 Square</option><option value="9:16">9:16 Portrait</option><option value="16:9">16:9 Landscape</option><option value="3:4">3:4 Portrait</option><option value="4:3">4:3 Landscape</option></select></label><label><span class="small-label">Source image URL (optional)</span><input class="input" id="imageUrl" type="url" placeholder="https://..." autocomplete="off"></label></div>
+      <p class="helper">If you already uploaded an image somewhere, paste its direct image URL to skip signed uploading.</p>
+      <button id="generate" class="primary" type="button"><span>✦</span><span id="generateLabel">Generate Image</span><span>→</span></button>
+      <div class="row" style="margin-top:10px;justify-content:center"><button id="stop" class="ghost" type="button" disabled>Stop checking</button><button id="loadConfig" class="ghost" type="button">Check task settings ↗</button></div>
+      <div class="mini-note">AI processing uses your Render proxy and the ImgUpscaler upstream account. Upstream credits and limits still apply. Prompt editing only works if your upstream job payload and model support prompts.</div>
+      <div class="api-config">
+        <details open><summary>🔑 API connection</summary><div class="details-inner">
+          <label class="small-label" for="baseUrl">API base URL</label><input class="input" id="baseUrl" type="url" value="https://hr-api-1-g40p.onrender.com" autocomplete="off" spellcheck="false">
+          <label class="small-label" for="apiKey" style="margin-top:12px">Your Render API_KEY (not ImgUpscaler credentials)</label><div class="key-field"><input class="input" id="apiKey" type="password" placeholder="Paste your API_KEY" autocomplete="off" spellcheck="false"><button class="mini-btn" id="showKey" type="button">Show</button></div>
+          <p class="helper">Only held in this tab, not hard-coded into HTML or stored in browser storage. Do not share this key publicly.</p>
+          <button class="secondary" id="testConnection" type="button" style="margin-top:10px">Test API Connection</button>
+        </div></details>
+        <details><summary>⚙️ Advanced API request templates</summary><div class="details-inner">
+          <p class="helper">The private ImgUpscaler sign-object and create-job JSON schemas have not been verified. These are editable examples, <b>not confirmed provider payloads</b>. Copy the actual request bodies from the provider's authorized API documentation or your own browser Network requests.</p>
+          <label class="small-label" for="signTemplate" style="margin-top:12px">POST /api/upload/sign · JSON body</label><textarea id="signTemplate" spellcheck="false">{
+  "file_name": "{{filename}}",
+  "content_type": "{{mime}}",
+  "file_size": "{{filesize}}"
+}</textarea>
+          <label class="small-label" for="jobTemplate" style="margin-top:12px">POST /api/jobs/create · JSON body</label><textarea id="jobTemplate" spellcheck="false">{
+  "full_key": "{{taskKey}}",
+  "image_url": "{{imageUrl}}",
+  "prompt": "{{prompt}}",
+  "aspect_ratio": "{{ratio}}"
+}</textarea>
+          <label class="small-label" for="promptTask" style="margin-top:12px">Prompt Edit task key (only if confirmed)</label><input class="input" id="promptTask" value="router_free.image_enhance_v1" spellcheck="false"><p class="helper">Prompt mode defaults to Enhance, because the provided three upstream task keys do not include a confirmed free-form AI editor. Change to your authorized prompt-edit model's exact key if known.</p>
+          <label class="small-label" style="margin-top:12px">Tokens available</label><p class="helper">{{filename}}, {{mime}}, {{filesize}}, {{imageUrl}}, {{imageKey}}, {{prompt}}, {{taskKey}}, {{ratio}}. The original upstream JSON response is visible under Diagnostics.</p>
+          <button class="ghost" id="resetTemplates" type="button">Restore example templates</button>
+        </div></details>
+      </div>
+    </section>
+    <section class="panel preview" aria-label="Editor preview">
+      <div class="preview-head"><h2>Image workspace</h2><div class="preview-actions"><button id="clear" class="icon-btn" type="button">↻ Reset</button><button id="download" class="icon-btn" type="button" disabled>↓ Download</button></div></div>
+      <div id="empty" class="empty"><div class="empty-art" aria-hidden="true"><div class="art-a"></div><div class="art-b"></div><div class="art-c">✦</div></div><h3>Magic begins with an image</h3><p>Upload a photo to preview it here, then choose an AI tool or experiment with the free manual adjustments.</p></div>
+      <div id="results" class="results"><div class="compare"><div class="image-tile"><span class="img-label">Original</span><img id="sourcePreview" alt="Original uploaded image"></div><div class="image-tile"><span class="img-label">Result</span><img id="resultPreview" alt="AI or locally edited image" class="hidden"><div class="waiting" id="waiting"><span>✦</span><span>Ready for your next edit</span></div></div></div><div class="result-toolbar"><small id="resultMeta">No generated result yet</small><div class="row"><button id="useResult" class="secondary" disabled type="button">Use as source ↗</button><button id="download2" class="secondary" disabled type="button">↓ Save image</button></div></div></div>
+      <div id="statusBox" class="status-box" role="status" aria-live="polite"><strong id="statusTitle"></strong><p id="statusMessage"></p><div id="progressTrack" class="progress-track"><span id="progressValue"></span></div></div>
+      <div class="filter-block"><div class="panel-title" style="margin-bottom:12px"><h2>🎛️ Manual photo adjustments</h2><span class="chip">Works offline</span></div><div class="filter-grid"><label>Brightness <output id="bValue">100%</output><input type="range" id="brightness" min="40" max="180" value="100"></label><label>Contrast <output id="cValue">100%</output><input type="range" id="contrast" min="40" max="180" value="100"></label><label>Saturation <output id="sValue">100%</output><input type="range" id="saturation" min="0" max="200" value="100"></label></div><div class="row" style="margin-top:12px"><button id="applyFilters" class="secondary" type="button">Apply manual edit</button><button id="resetFilters" class="ghost" type="button">Reset sliders</button></div><p class="note">These sliders edit the image locally in your browser; they are not AI generation.</p></div>
+      <div class="divider"></div><details><summary style="font-size:12px;cursor:pointer;color:#c0c8da">Technical diagnostics (for API errors)</summary><div style="margin-top:12px"><pre id="debug" class="debug">No API requests yet.</pre><button class="ghost" id="copyDebug" type="button" style="margin-top:9px">Copy diagnostics</button></div></details>
+    </section>
+  </main>
+  <footer class="credit">Designed for Sk Habibulla • SK Vision AI • Independent interface, not affiliated with Google or Gemini</footer>
+</div>
+<div class="toast" id="toast" role="alert"></div>
+<script>
+(() => {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const TASKS = {'enhance':'router_free.image_enhance_v1','remove-background':'router_free.me_remove_background_v1','remove-object':'router_free.me_remove_object_v1'};
+  const defaultSign = $('signTemplate').value;
+  const defaultJob = $('jobTemplate').value;
+  let mode = 'prompt', file = null, objectUrl = null, sourceUrl = '', resultUrl = '', working = false, jobAbort = false, debugData = [], canvasURL = null;
+  let requestController = null;
+  const pause = (ms) => new Promise(r => setTimeout(r, ms));
+  function base() {return $('baseUrl').value.trim().replace(/\/+$/,'');}
+  function apiPath(path) {return base() + path;}
+  function key() {return $('apiKey').value.trim();}
+  function notify(msg) {const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.classList.remove('show'),5000);}
+  function log(step,data) {
+    const record={time:new Date().toLocaleTimeString(),step,data};debugData.push(record);if(debugData.length>20)debugData.shift();
+    $('debug').textContent=JSON.stringify(debugData,(k,v)=>/authorization|cookie|api.?key|signature|signedurl|token/i.test(k)?'[hidden]':v,2);
+  }
+  function progress(n) { $('progressTrack').classList.add('show');$('progressValue').style.width=Math.max(2,Math.min(100,n))+'%'; }
+  function status(title,msg,state='normal',pct=null){const s=$('statusBox');s.className='status-box show'+(state==='error'?' error':state==='success'?' success':'');$('statusTitle').textContent=title;$('statusMessage').textContent=msg;if(pct===null)$('progressTrack').classList.remove('show');else progress(pct);}
+  function setBusy(v){working=v;$('generate').disabled=v;$('stop').disabled=!v;$('generateLabel').textContent=v?'Working on your image...':'Generate Image';}
+  function validURL(x) {try{let u=new URL(x);return ['https:','http:','data:','blob:'].includes(u.protocol)}catch{return false}}
+  function releaseBlob(){if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}}
+  function releaseCanvas(){if(canvasURL){URL.revokeObjectURL(canvasURL);canvasURL=null;}}
+  function fileChosen(newFile){
+    if(!newFile) return;
+    if(!['image/jpeg','image/png','image/webp'].includes(newFile.type)){notify('Choose a JPG, PNG or WebP image.');return}
+    if(newFile.size>24*1024*1024){notify('Maximum supported image size is 24 MB.');return}
+    releaseBlob();file=newFile;objectUrl=URL.createObjectURL(file);sourceUrl=objectUrl;$('sourcePreview').src=sourceUrl;$('tinyPreview').src=sourceUrl;$('fileInfo').style.display='flex';$('fileName').textContent=file.name;$('fileSize').textContent=(file.size/1024/1024).toFixed(2)+' MB';$('imageUrl').value='';resetResult();showResults();
+  }
+  function showResults(){$('empty').classList.add('hidden');$('results').style.display='block'}
+  function resetResult(){resultUrl='';releaseCanvas();$('resultPreview').classList.add('hidden');$('resultPreview').removeAttribute('src');$('waiting').classList.remove('hidden');$('waiting').textContent='Ready for your next edit';$('download').disabled=$('download2').disabled=$('useResult').disabled=true;$('resultMeta').textContent='No generated result yet'}
+  function setResult(url,note='Image ready'){if(!validURL(url))throw new Error('Response did not contain a valid image URL');resultUrl=url;$('resultPreview').src=url;$('resultPreview').classList.remove('hidden');$('waiting').classList.add('hidden');$('download').disabled=$('download2').disabled=$('useResult').disabled=false;$('resultMeta').textContent=note;showResults()}
+  function wipe() {jobAbort=true;requestController?.abort();setBusy(false);releaseBlob();releaseCanvas();file=null;sourceUrl='';$('fileInput').value='';$('imageUrl').value='';$('fileInfo').style.display='none';$('sourcePreview').removeAttribute('src');resetResult();$('empty').classList.remove('hidden');$('results').style.display='none';$('statusBox').className='status-box';}
+  $('fileInput').addEventListener('change',e=>fileChosen(e.target.files?.[0]));
+  const uploadBox=$('uploadBox');['dragenter','dragover'].forEach(e=>uploadBox.addEventListener(e,ev=>{ev.preventDefault();uploadBox.classList.add('dragging')}));['dragleave','drop'].forEach(e=>uploadBox.addEventListener(e,ev=>{ev.preventDefault();uploadBox.classList.remove('dragging')}));uploadBox.addEventListener('drop',ev=>fileChosen(ev.dataTransfer.files?.[0]));
+  $('removeImage').onclick=wipe;$('clear').onclick=wipe;
+  document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{mode=btn.dataset.mode;document.querySelectorAll('[data-mode]').forEach(el=>el.classList.toggle('active',el===btn));$('prompt').placeholder=mode==='enhance'?'Optional: Enhance sharpness and lighting naturally.':mode==='remove-background'?'Optional: Remove background and keep subject clean.':mode==='remove-object'?'Describe the object you want to remove.':'Example: Change my outfit to a black suit, keep the same face.';}));
+  document.querySelectorAll('[data-prompt]').forEach(btn=>btn.addEventListener('click',()=>{$('prompt').value=btn.dataset.prompt;$('prompt').focus()}));
+  $('showKey').onclick=()=>{const el=$('apiKey');el.type=el.type==='password'?'text':'password';$('showKey').textContent=el.type==='password'?'Show':'Hide'};
+  $('resetTemplates').onclick=()=>{$('signTemplate').value=defaultSign;$('jobTemplate').value=defaultJob;$('promptTask').value=TASKS.enhance;notify('Example payload templates restored.')};
+  function template(text,variables){
+    let v;try{v=JSON.parse(text)}catch(e){throw new Error('Advanced JSON template is invalid: '+e.message)}
+    function walk(x){if(typeof x==='string'){const m=x.match(/^\{\{(\w+)\}\}$/);if(m){if(!(m[1] in variables))throw new Error('Unknown template token '+m[1]);return variables[m[1]]}return x.replace(/\{\{(\w+)\}\}/g,(raw,k)=>{if(!(k in variables))throw new Error('Unknown template token '+k);return String(variables[k])})}if(Array.isArray(x))return x.map(walk);if(x&&typeof x==='object')return Object.fromEntries(Object.entries(x).map(([k,v])=>[k,walk(v)]));return x}
+    return walk(v);
+  }
+  async function callAPI(path,options={}){
+    const headers={'Accept':'application/json',...options.headers}; if(key()) headers['X-API-Key']=key();
+    if(options.body&&!headers['Content-Type'])headers['Content-Type']='application/json';
+    const res=await fetch(apiPath(path),{...options,headers,signal:requestController?.signal});
+    const txt=await res.text();let json;try{json=JSON.parse(txt)}catch{json={raw:txt.slice(0,1500)}};
+    log(options.method||'GET '+path,{status:res.status,response:json});
+    if(!res.ok)throw new Error(path+' returned HTTP '+res.status+': '+(json.error||json.message||txt.slice(0,180)));
+    return json;
+  }
+  async function check(){const dot=$('connectionDot');const label=$('connectionText');try{const r=await fetch(apiPath('/api/health'),{signal:AbortSignal.timeout(12000)});const x=await r.json();if(!r.ok||!x.ok)throw new Error('Health check failed');dot.className='dot ok';label.textContent='API online';return true}catch(e){dot.className='dot bad';label.textContent='API offline';return false}}
+  $('testConnection').onclick=async()=>{const ok=await check();if(!ok){status('Could not connect','Check Render deployment and URL. The free instance may be waking up.','error');return}try{const c=await callAPI('/api/task-config?task=enhance');status('API connected','Health check and authenticated task config succeeded.','success');notify('Connection works!')}catch(e){status('Gateway online, auth or upstream failed',e.message,'error')}};
+  $('loadConfig').onclick=async()=>{try{const task=mode==='prompt'?'enhance':mode;const c=await callAPI('/api/task-config?task='+encodeURIComponent(task));status('Task config received','Check Technical diagnostics for exact configuration fields.','success');notify('Task config loaded in diagnostics.')}catch(e){status('Task config failed',e.message,'error')}};
+  function nestedCandidates(data){let list=[],seen=new WeakSet();function dig(x,depth){if(!x||typeof x!=='object'||depth>5||seen.has(x))return;seen.add(x);list.push(x);for(const y of Object.values(x))if(y&&typeof y==='object')dig(y,depth+1)}dig(data,0);return list}
+  function pickProp(json,names){const lowered=new Set(names.map(x=>x.toLowerCase()));for(const obj of nestedCandidates(json)){for(const [k,v]of Object.entries(obj))if(lowered.has(k.toLowerCase())&&v!==undefined&&v!==null&&v!=='')return v;}return null}
+  function signedInfo(response){
+    const url=pickProp(response,['signedUrl','signed_url','presignedUrl','presigned_url','uploadUrl','upload_url','putUrl','put_url','uploadLink','upload_link']);
+    const fallback=pickProp(response,['url']);
+    const signed=typeof url==='string'?url:(typeof fallback==='string'?fallback:null);
+    const method=pickProp(response,['uploadMethod','upload_method','method'])||'PUT';
+    const headers=pickProp(response,['uploadHeaders','upload_headers','headers'])||{};
+    const imageKey=pickProp(response,['objectKey','object_key','fileKey','file_key','key','objectName','object_name','path'])||'';
+    const imageUrl=pickProp(response,['fileUrl','file_url','publicUrl','public_url','imageUrl','image_url','location'])||'';
+    const fields=pickProp(response,['fields','formFields','form_fields'])||null;
+    return {signed,method:String(method).toUpperCase(),headers:headers&&typeof headers==='object'&&!Array.isArray(headers)?headers:{},imageKey,imageUrl,fields};
+  }
+  async function uploadSigned(response){
+    const info=signedInfo(response);
+    if(!info.signed||!validURL(info.signed))throw new Error('The sign API did not return a recognized signed upload URL. Check Technical diagnostics and adjust your sign-object request template.');
+    status('Uploading original image','Sending photo to signed storage...', 'normal',30);
+    let res;
+    try{
+      if(info.method==='POST'&&info.fields){const form=new FormData();for(const [k,v] of Object.entries(info.fields))form.append(k,String(v));form.append('file',file);res=await fetch(info.signed,{method:'POST',body:form,signal:requestController?.signal})}
+      else{res=await fetch(info.signed,{method:info.method,headers:Object.keys(info.headers).length?info.headers:{'Content-Type':file.type},body:file,signal:requestController?.signal})}
+      if(!res.ok)throw new Error('Storage rejected the image: HTTP '+res.status);
+    }catch(e){
+      if(e.name==='AbortError')throw e;
+      if(e instanceof TypeError && info.method==='PUT'){
+        // Browser-to-storage CORS can be limited to the provider's own website.
+        // Retry signed PUT through our authenticated, storage-host-allowlisted Render proxy.
+        status('Trying secure upload fallback','Browser upload was blocked. Retrying through your Render server...', 'normal',36);
+        const hdr={'X-API-Key':key(),'Content-Type':file.type,'X-Signed-Url':info.signed,'X-Upload-Method':'PUT'};
+        if(Object.keys(info.headers).length)hdr['X-Upload-Headers']=JSON.stringify(info.headers);
+        const fallback=await fetch(apiPath('/api/upload/object'),{method:'POST',headers:hdr,body:file,signal:requestController?.signal});
+        const responseText=await fallback.text();let fallbackJSON;try{fallbackJSON=JSON.parse(responseText)}catch{fallbackJSON={error:responseText.slice(0,300)}};
+        log('SIGNED UPLOAD FALLBACK',{status:fallback.status,response:fallbackJSON});
+        if(!fallback.ok)throw new Error('Render signed upload fallback failed: '+(fallbackJSON.error||('HTTP '+fallback.status)));
+      }else if(e instanceof TypeError){throw new Error('Signed storage upload blocked by CORS or network; the upstream upload method may need custom handling. '+e.message)}
+      else throw e;
+    }
+    if(typeof info.imageUrl==='string'&&validURL(info.imageUrl))return{imageUrl:info.imageUrl,imageKey:info.imageKey};
+    // A signed URL may contain private authorization params. Never assume it is a public image URL.
+    if(!info.imageKey)throw new Error('Upload succeeded, but sign response has no recognized image key or public file URL. Inspect diagnostics and adapt the job JSON mapping.');
+    return {imageUrl:'',imageKey:info.imageKey};
+  }
+  function jobId(data){const v=pickProp(data,['jobId','job_id','taskId','task_id','id']);return typeof v==='number'||typeof v==='string'?String(v):null}
+  function resultImage(data){
+    const keys=['resultUrl','result_url','outputUrl','output_url','imageUrl','image_url','downloadUrl','download_url','generatedImage','generated_image','output','images','results'];
+    function match(value){if(typeof value==='string'&&validURL(value))return value;if(Array.isArray(value)){for(const v of value){const u=match(v);if(u)return u}}if(value&&typeof value==='object'){for(const k of ['url','image','src','image_url','download_url','output_url']){if(k in value){const u=match(value[k]);if(u)return u}}}return null}
+    for(const node of nestedCandidates(data))for(const [key,val]of Object.entries(node))if(keys.map(x=>x.toLowerCase()).includes(key.toLowerCase())){const url=match(val);if(url)return url}return null;
+  }
+  function stateOf(data){const val=pickProp(data,['status','state','jobStatus','job_status','taskStatus','task_status']);return String(val||'').toLowerCase()}
+  async function poll(id){for(let i=0;i<45;i++){
+      if(jobAbort)throw new Error('Stopped by user');await pause(i<8?2500:4000);if(jobAbort)throw new Error('Stopped by user');
+      const x=await callAPI('/api/jobs/'+encodeURIComponent(id));const url=resultImage(x);
+      if(url)return url;const s=stateOf(x);
+      if(['failed','failure','error','canceled','cancelled'].includes(s))throw new Error('Image job failed: '+JSON.stringify(x).slice(0,350));
+      status('AI is processing','Job '+id+' · '+(s||'waiting')+' · '+(i+1)+' checks','normal',Math.min(94,56+(i+1)*.85));
+    }throw new Error('Job is still running. Check status again later. The job ID is available in diagnostics.');}
+  $('generate').onclick=async()=>{
+    if(working)return;
+    const direct=$('imageUrl').value.trim();if(!file&&!direct){notify('Upload a photo or paste a source image URL first.');return}
+    if(direct&&!validURL(direct)){notify('Please enter a valid image URL.');return}
+    if(!base().startsWith('https://')&&!base().startsWith('http://')){notify('Enter a correct API base URL.');return}
+    if(!key()){notify('Paste your Render API_KEY under API connection first.');document.querySelector('.api-config details').open=true;return}
+    if(!file&&direct){sourceUrl=direct;$('sourcePreview').src=direct;showResults()}
+    jobAbort=false;requestController=new AbortController();setBusy(true);resetResult();status('Preparing image','Checking the input and preparing job request...','normal',8);
+    try{
+      const taskKey=mode==='prompt'?$('promptTask').value.trim():TASKS[mode];
+      if(!taskKey)throw new Error('Task key is empty');
+      let uploaded={imageUrl:direct,imageKey:''};
+      if(file&&!direct){
+        status('Requesting a signed URL','Asking the provider for upload permission...','normal',16);
+        const signBody=template($('signTemplate').value,{filename:file.name,mime:file.type,filesize:file.size,imageUrl:'',imageKey:'',prompt:$('prompt').value,taskKey,ratio:$('ratio').value});
+        const signed=await callAPI('/api/upload/sign',{method:'POST',body:JSON.stringify(signBody)});
+        uploaded=await uploadSigned(signed);
+      }
+      status('Submitting AI job','Uploading complete. Sending image-edit request...','normal',52);
+      const values={filename:file?.name||'',mime:file?.type||'',filesize:file?.size||0,imageUrl:uploaded.imageUrl,imageKey:uploaded.imageKey,prompt:$('prompt').value,taskKey,ratio:$('ratio').value};
+      const body=template($('jobTemplate').value,values);
+      const created=await callAPI('/api/jobs/create',{method:'POST',body:JSON.stringify(body)});
+      const immediate=resultImage(created);
+      const finalUrl=immediate||await (async()=>{const id=jobId(created);if(!id)throw new Error('Job creation response has no recognized job ID or resulting image. Open diagnostics and adapt your create-job JSON request.');status('Image job queued','Job '+id+' created. Waiting for results...','normal',56);return poll(id)})();
+      setResult(finalUrl,'AI result ready · '+new Date().toLocaleTimeString());status('Image ready!','Your result is shown in the workspace.','success',100);notify('Image edit completed!');
+    }catch(e){if(e.name==='AbortError'||jobAbort){status('Stopped','The operation was stopped.','normal');}else{status('Image edit could not complete',e.message,'error');notify(e.message)}log('EDIT ERROR',{message:e.message})}
+    finally{setBusy(false);requestController=null}
+  };
+  $('stop').onclick=()=>{jobAbort=true;requestController?.abort();setBusy(false)};
+  function readImg(src){return new Promise((resolve,reject)=>{const img=new Image();img.crossOrigin='anonymous';img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('Unable to load this image (possibly due to cross-origin restrictions).'));img.src=src})}
+  function filterCSS(){return `brightness(${$('brightness').value}%) contrast(${$('contrast').value}%) saturate(${$('saturation').value}%)`}
+  for(const [id,out] of [['brightness','bValue'],['contrast','cValue'],['saturation','sValue']])$(id).oninput=()=>{$(out).textContent=$(id).value+'%';if(!resultUrl&&sourceUrl)$('sourcePreview').style.filter=filterCSS()};
+  $('resetFilters').onclick=()=>{for(const [id,out] of [['brightness','bValue'],['contrast','cValue'],['saturation','sValue']]){$(id).value='100';$(out).textContent='100%'}$('sourcePreview').style.filter='none'};
+  $('applyFilters').onclick=async()=>{
+    const src=resultUrl||sourceUrl||$('imageUrl').value.trim();if(!src){notify('Select an image first.');return}
+    try{const img=await readImg(src);const cv=document.createElement('canvas');cv.width=img.naturalWidth;cv.height=img.naturalHeight;const c=cv.getContext('2d');c.filter=filterCSS();c.drawImage(img,0,0);const blob=await new Promise(r=>cv.toBlob(r,'image/png'));if(!blob)throw Error('Failed to export adjusted image');releaseCanvas();canvasURL=URL.createObjectURL(blob);setResult(canvasURL,'Manual adjustments applied · '+cv.width+'×'+cv.height);$('sourcePreview').style.filter='none';status('Manual edit complete','Locally adjusted image can now be downloaded.','success');notify('Manual edit applied!')}
+    catch(e){status('Manual adjustment failed',e.message,'error')}
+  };
+  async function saveImage(){if(!resultUrl)return;try{
+      const a=document.createElement('a');a.rel='noopener';a.download='sk-vision-edited-'+Date.now()+'.png';
+      if(resultUrl.startsWith('blob:')||resultUrl.startsWith('data:')){a.href=resultUrl;a.click();return}
+      const r=await fetch(resultUrl);if(!r.ok)throw new Error('Image download not available');const b=await r.blob();const u=URL.createObjectURL(b);a.href=u;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)
+    }catch(e){window.open(resultUrl,'_blank','noopener');notify('Opened image in a new tab. Save it from your browser if downloads are blocked by CORS.')}}
+  $('download').onclick=saveImage;$('download2').onclick=saveImage;
+  $('useResult').onclick=async()=>{if(!resultUrl)return;try{const r=await fetch(resultUrl);const b=await r.blob();const mime=b.type||'image/png';fileChosen(new File([b],'edited-image.'+(mime==='image/jpeg'?'jpg':'png'),{type:mime}));notify('Result set as the new source')}catch{ $('imageUrl').value=resultUrl;sourceUrl=resultUrl;file=null;releaseBlob();$('fileInfo').style.display='none';$('sourcePreview').src=resultUrl;resetResult();notify('Result URL set as image source')}};
+  $('copyDebug').onclick=async()=>{try{await navigator.clipboard.writeText($('debug').textContent);notify('Diagnostics copied!')}catch{notify('Clipboard is unavailable. Select diagnostics to copy manually.')}};
+  $('imageUrl').addEventListener('change',()=>{const value=$('imageUrl').value.trim();if(value&&validURL(value)){sourceUrl=value;$('sourcePreview').src=value;showResults();resetResult()}});
+  // No API key is embedded in this file or persisted in localStorage / sessionStorage.
+  check();
+})();
+</script>
+</body>
+</html>

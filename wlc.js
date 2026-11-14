@@ -7,10 +7,10 @@ module.exports = {
   config: {
     name: "help",
     aliases: ["menu", "commands"],
-    version: "5.0",
+    version: "5.5",
     author: "SK HABIBULLA",
     shortDescription: "HR HABIB Premium Help Menu",
-    longDescription: "Display all bot commands in HR HABIB premium style",
+    longDescription: "Compact WhatsApp command menu",
     category: "system",
     guide: "{pn}help [command name]"
   },
@@ -18,135 +18,183 @@ module.exports = {
   onStart: async function ({ message, args, prefix }) {
     const allCommands = global.GoatBot.commands;
 
-    const line = "━━━━━━━━━━━━━━━━━━";
+    if (!allCommands) {
+      return message.reply("❌ Commands are not available!");
+    }
 
-    const fancy = (str) =>
-      String(str).replace(/[A-Za-z]/g, c => {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        const fonts = [
-          ..."𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙",
-          ..."𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳"
-        ];
-        return fonts[chars.indexOf(c)] || c;
-      });
+    const line = "━━━━━━━━━━━━━━━━━━━━";
 
-    const categories = {};
+    const categoryEmoji = {
+      admin: "👑",
+      ai: "🤖",
+      "ai-image": "🎨",
+      anime: "🎌",
+      birthday: "🎂",
+      box: "📦",
+      "box chat": "👥",
+      chat: "💬",
+      config: "⚙️",
+      "contacts admin": "📞",
+      custom: "🛠️",
+      economy: "💰",
+      fun: "🎭",
+      game: "🎮",
+      group: "👥",
+      image: "🖼️",
+      info: "📊",
+      information: "📚",
+      love: "❤️",
+      media: "🎬",
+      other: "🌐",
+      owner: "🔐",
+      rank: "🏆",
+      software: "💻",
+      supportgc: "🤝",
+      system: "⚙️",
+      tools: "🧰",
+      utility: "🔧",
+      wiki: "📖",
+      others: "📂"
+    };
 
-    // COMMAND INFORMATION
+    const commandEmoji = {
+      ban: "🔨",
+      kick: "🥾",
+      restart: "🔄",
+      update: "⬆️",
+      eval: "🔐",
+      adminonly: "🔒",
+      backupdata: "💾",
+      welcome: "👋",
+      setwelcome: "👋",
+      setleave: "🚪",
+      download: "📥",
+      video: "🎥",
+      tiktok: "🎵",
+      image: "🖼️",
+      weather: "🌤️",
+      baby: "🤖",
+      help: "📚",
+      owner: "👑",
+      ping: "⚡",
+      balance: "💰",
+      daily: "🎁",
+      quiz: "❓",
+      ffinfo: "🎮"
+    };
+
+    // COMMAND DETAILS
     if (args[0]) {
       const cmdName = args[0].toLowerCase();
 
       const cmd =
         allCommands.get(cmdName) ||
         [...allCommands.values()].find(c =>
-          c.config.aliases?.includes(cmdName)
+          (c.config.aliases || []).some(
+            a => a.toLowerCase() === cmdName
+          )
         );
 
       if (!cmd) {
         return message.reply(
-`╭━━━〔 ❌ HR HABIB 〕━━━╮
-┃
-┃  Command Not Found!
-┃
-┃  Command: ${cmdName}
-┃
-┃  Use ${prefix}help
-┃  To see all commands.
-┃
-╰━━━━━━━━━━━━━━━━━━╯`
+`╭━━〔 ❌ COMMAND NOT FOUND 〕━━╮
+┃ ✦ Command : ${cmdName}
+┃ ✦ Use : ${prefix}help
+╰━━━━━━━━━━━━━━━━━━━━╯`
         );
       }
 
-      const usage = typeof cmd.config.guide === "string"
-        ? cmd.config.guide.replace("{pn}", prefix + cmd.config.name)
-        : prefix + cmd.config.name;
+      const cfg = cmd.config;
+      const usage = (cfg.guide || "{pn}")
+        .replace(/\{pn\}/g, prefix + cfg.name);
 
       return message.reply(
-`╭━━━〔 🧩 HR HABIB INFO 〕━━━╮
-┃
-┃  ✦ NAME     : ${cmd.config.name}
-┃  ✦ ALIASES  : ${cmd.config.aliases?.join(", ") || "None"}
-┃  ✦ CATEGORY : ${cmd.config.category || "Others"}
-┃  ✦ VERSION  : v${cmd.config.version || "1.0"}
-┃  ✦ AUTHOR   : ${cmd.config.author || "Unknown"}
-┃
-${line}
-┃  📖 DESCRIPTION
-┃  ${cmd.config.longDescription ||
-     cmd.config.shortDescription || "No description"}
-┃
-┃  ⚡ USAGE
-┃  ${usage}
-┃
+`╭━━〔 🧩 COMMAND DETAILS 〕━━╮
+┃ ✨ NAME : ${cfg.name}
+┃ 🔗 ALIAS : ${(cfg.aliases || []).join(", ") || "None"}
+┃ 📂 CATEGORY : ${cfg.category || "Others"}
+┃ 💎 VERSION : ${cfg.version || "1.0"}
+┃ 👑 AUTHOR : ${cfg.author || "Unknown"}
+┣━━━━━━━━━━━━━━━━━━━━
+┃ 📖 DESCRIPTION
+┃ ${cfg.longDescription || cfg.shortDescription || "No description"}
+┣━━━━━━━━━━━━━━━━━━━━
+┃ ⚡ USAGE
+┃ ${usage}
 ╰━━━━━━━━━━━━━━━━━━━━╯
-       ⚡ POWERED BY HR HABIB`
+👑 HR HABIB BOT`
       );
     }
 
-    // GROUP COMMANDS BY CATEGORY
-    for (const [name, cmd] of allCommands) {
-      const cat = (cmd.config.category || "Others").toLowerCase();
+    // GROUP COMMANDS
+    const categories = {};
 
-      if (!categories[cat]) categories[cat] = [];
+    for (const [name, cmd] of allCommands) {
+      const cat = (cmd.config.category || "Others")
+        .toLowerCase();
+
+      if (!categories[cat]) {
+        categories[cat] = [];
+      }
 
       categories[cat].push(name);
     }
 
-    // MAIN HELP BODY
+    const categoryNames = Object.keys(categories).sort();
+
+    const totalCommands = allCommands.size;
+    const totalCategories = categoryNames.length;
+
+    // MAIN MENU
     let msg =
-`╭━━━━━━━━━━━━━━━━━━━━╮
-       👑 HR HABIB BOT
-       ✨ COMMAND CENTER
+`╭━━━━〔 🍘 HR HABIB BOT 〕━━━━╮
+┃ ✨ WHATSAPP V5.5
+┃ 👑 DEVELOPER : SK HABIBULLA
+┃ ⚡ PREFIX : ${prefix}
+┃ 📚 COMMANDS : ${totalCommands}
+┃ 📂 CATEGORIES : ${totalCategories}
 ╰━━━━━━━━━━━━━━━━━━━━╯
 
-┏━━━〔 🤖 BOT INFORMATION 〕━━━┓
-┃
-┃  👑 Developer : SK HABIBULLA
-┃  ⚡ Prefix    : ${prefix}
-┃  📚 Commands  : ${allCommands.size}
-┃  📂 Category  : ${Object.keys(categories).length}
-┃  💎 Version   : V5.0
-┃
-┗━━━━━━━━━━━━━━━━━━━━┛
-
-       ✦ COMMAND DIRECTORY ✦
-${line}
 `;
 
-    for (const cat of Object.keys(categories).sort()) {
+    // CATEGORY MENU
+    for (const cat of categoryNames) {
       const commands = categories[cat].sort();
+      const emoji = categoryEmoji[cat] || "📁";
+      const title = cat.toUpperCase();
 
       msg +=
-`\n╭━━〔 📁 ${cat.toUpperCase()} 〕━━╮\n`;
+`╭━━〔 ${emoji} ${title} 〕━━╮
+┃ ✨ ${commands.length} COMMANDS
+┣━━━━━━━━━━━━━━━━━━━━
+`;
 
-      for (let i = 0; i < commands.length; i += 2) {
-        const first = commands[i];
-        const second = commands[i + 1];
+      commands.forEach((name, index) => {
+        const icon = commandEmoji[name.toLowerCase()] || "✦";
+        const number = String(index + 1).padStart(2, "0");
 
-        msg += `┃  ✧ ${fancy(first)}`;
+        msg += `┃ ${number} ┊ ${icon} ${name}\n`;
+      });
 
-        if (second) msg += `  ✧ ${fancy(second)}`;
-
-        msg += "\n";
-      }
-
-      msg += "╰━━━━━━━━━━━━━━━━━━╯\n";
+      msg += "╰━━━━━━━━━━━━━━━━━━━━╯\n\n";
     }
 
+    // FOOTER
     msg +=
-`
-╭━━━━━━━━━━━━━━━━━━━━╮
-┃
-┃  💡 COMMAND GUIDE
-┃
-┃  ➤ ${prefix}help
-┃  ➤ ${prefix}help command
-┃
-┃  ❤️ THANK YOU FOR USING
-┃       HR HABIB BOT
-┃
+`╭━━━━━━━━━━━━━━━━━━━━╮
+┃ 📚 TOTAL COMMANDS : ${totalCommands}
+┣━━━━━━━━━━━━━━━━━━━━
+┃ 📂 TOTAL CATEGORIES : ${totalCategories}
 ╰━━━━━━━━━━━━━━━━━━━━╯
-      © SK HABIBULLA`;
+
+╭━━〔 💡 COMMAND GUIDE 〕━━╮
+┃ ✦ ${prefix}help
+┃ ✦ ${prefix}help command
+┃ ✦ ${prefix}help category
+╰━━━━━━━━━━━━━━━━━━━━╯
+
+👑 DEVELOPER : SK HABIBULLA
+❤️ THANK YOU FOR USING HR HABIB BOT`;
 
     // RANDOM GIF
     const gifURLs = [
@@ -155,56 +203,108 @@ ${line}
       "https://i.imgur.com/KQBcxOV.gif"
     ];
 
-    const randomGifURL =
+    const randomGif =
       gifURLs[Math.floor(Math.random() * gifURLs.length)];
 
     const gifFolder = path.join(__dirname, "cache");
-
-    await fs.ensureDir(gifFolder);
-
     const gifPath = path.join(
       gifFolder,
-      path.basename(randomGifURL)
+      "hr-habib-help.gif"
     );
 
     try {
+      await fs.ensureDir(gifFolder);
+
       if (!await fs.pathExists(gifPath)) {
-        await downloadGif(randomGifURL, gifPath);
+        await downloadGif(randomGif, gifPath);
       }
 
       return message.reply({
         body: msg,
         attachment: fs.createReadStream(gifPath)
       });
-    } catch (error) {
-      console.error("[HR HABIB HELP]", error);
 
+    } catch (error) {
+      console.error("[HR HABIB HELP ERROR]", error);
       return message.reply(msg);
     }
   }
 };
 
-function downloadGif(url, dest) {
+// GIF DOWNLOADER
+function downloadGif(url, dest, redirects = 0) {
   return new Promise((resolve, reject) => {
+    if (redirects > 5) {
+      return reject(new Error("Too many redirects"));
+    }
+
     const file = fs.createWriteStream(dest);
 
-    https.get(url, (res) => {
-      if (res.statusCode !== 200) {
+    const cleanup = () => {
+      file.destroy();
+      fs.remove(dest).catch(() => {});
+    };
+
+    const request = https.get(url, {
+      headers: {
+        "User-Agent": "HR-HABIB-BOT/5.5"
+      },
+      timeout: 15000
+    }, response => {
+
+      if ([301, 302, 303, 307, 308].includes(response.statusCode)) {
+        const location = response.headers.location;
+        response.resume();
         file.close();
-        fs.unlink(dest, () => {});
+
+        if (!location) {
+          cleanup();
+          return reject(new Error("Redirect URL missing"));
+        }
+
+        return downloadGif(
+          new URL(location, url).href,
+          dest,
+          redirects + 1
+        ).then(resolve).catch(reject);
+      }
+
+      if (response.statusCode !== 200) {
+        response.resume();
+        cleanup();
         return reject(new Error("GIF download failed"));
       }
 
-      res.pipe(file);
+      response.pipe(file);
 
       file.on("finish", () => {
-        file.close(resolve);
+        file.close(err => {
+          if (err) {
+            cleanup();
+            return reject(err);
+          }
+          resolve();
+        });
       });
 
-      file.on("error", reject);
-    }).on("error", (err) => {
-      fs.unlink(dest, () => {});
+      response.on("error", err => {
+        cleanup();
+        reject(err);
+      });
+
+      file.on("error", err => {
+        cleanup();
+        reject(err);
+      });
+    });
+
+    request.on("timeout", () => {
+      request.destroy(new Error("GIF download timeout"));
+    });
+
+    request.on("error", err => {
+      cleanup();
       reject(err);
     });
   });
-        }
+}

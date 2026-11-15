@@ -1,12 +1,12 @@
 
 /**
  * HR HABIB — Instagram GC Pending Manager
- * API: https://hr-expb.onrender.com
+ * API: https://pending-1.onrender.com
  * Package: @eryxenx/insta-chat v2.2.7
  * Author: SK HABIBULLA
  */
 
-const API_URL = "https://hr-expb.onrender.com";
+const API_URL = "https://pending-1.onrender.com";
 const CACHE_TTL = 5 * 60 * 1000;
 const ACTION_DELAY = 500;
 
